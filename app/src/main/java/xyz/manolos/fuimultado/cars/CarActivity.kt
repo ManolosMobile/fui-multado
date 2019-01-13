@@ -10,7 +10,12 @@ import xyz.manolos.fuimultado.R
 import xyz.manolos.fuimultado.model.Car
 import xyz.manolos.fuimultado.service.CarServiceCreator
 
-class CarActivity : AppCompatActivity() {
+interface CarView {
+    fun addCar(car: Car)
+    fun showError()
+}
+
+class CarActivity : AppCompatActivity(), CarView {
 
     private lateinit var presenter: CarPresenter
 
@@ -36,12 +41,12 @@ class CarActivity : AppCompatActivity() {
         }
     }
 
-    fun addCar(car: Car) {
+    override fun addCar(car: Car) {
         Toast.makeText(this, "${car.name}", Toast.LENGTH_LONG).show()
         // add car into the recyclerview
     }
 
-    fun showError() {
+    override fun showError() {
         // show toast or snackbar
     }
 }

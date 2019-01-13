@@ -4,11 +4,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import xyz.manolos.fuimultado.model.Car
 import xyz.manolos.fuimultado.service.CarService
 
 class CarPresenter(
-    private val carActivity: CarActivity,
+    private val view: CarView,
     private val carService: CarService
 ) {
 
@@ -19,15 +18,13 @@ class CarPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    carActivity.addCar(it)
+                    view.addCar(it)
                 },
                 onError = {
-                    carActivity.showError()
+                    view.showError()
                 }
             )
             .addTo(disposables)
-
-        carActivity.addCar(Car("Test"))
     }
 
     fun disposeResources() {
