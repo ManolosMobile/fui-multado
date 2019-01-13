@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">fui-multado</string>
+
+    <string name="plate_hint">Plate</string>
+    <string name="renavam_hint">Renavam</string>
+
+    <string name="add_car_dialog_title">Add a car</string>
 </resources>
