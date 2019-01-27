@@ -5,10 +5,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import xyz.manolos.fuimultado.service.CarService
+import javax.inject.Inject
 
-class CarPresenter(
-    private val view: CarView,
-    private val carService: CarService
+class CarPresenter @Inject constructor(
+    private val carService: CarService,
+    private val view: CarView
 ) {
 
     private val disposables = CompositeDisposable()

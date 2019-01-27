@@ -6,9 +6,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_car.*
 import kotlinx.android.synthetic.main.add_car_dialog.*
+import xyz.manolos.fuimultado.FuiMultadoApplication
 import xyz.manolos.fuimultado.R
+import xyz.manolos.fuimultado.injector
 import xyz.manolos.fuimultado.model.Car
-import xyz.manolos.fuimultado.service.CarServiceCreator
+import javax.inject.Inject
 
 interface CarView {
     fun addCar(car: Car)
@@ -17,13 +19,15 @@ interface CarView {
 
 class CarActivity : AppCompatActivity(), CarView {
 
-    private lateinit var presenter: CarPresenter
+    @Inject lateinit var presenter: CarPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car)
 
-        presenter = CarPresenter(this, CarServiceCreator.carService)
+        injector
+            .plus(CarModule(this))
+            .inject(this)
 
         addCarButton.setOnClickListener {
             AlertDialog
