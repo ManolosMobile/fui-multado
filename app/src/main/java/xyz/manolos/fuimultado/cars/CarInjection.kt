@@ -7,12 +7,8 @@ import dagger.Subcomponent
 @Subcomponent(modules = [CarModule::class])
 interface CarComponent {
 
-    fun inject(activity: CarActivity)
+    val presenter: CarPresenter
 }
 
 @Module
-class CarModule(private val carView: CarView) {
-
-    @Provides
-    fun provideCarView() = carView
-}
+class CarModule(@get:Provides val carView: CarView)
